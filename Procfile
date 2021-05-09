@@ -1,1 +1,1 @@
-web: gunicorn afin.wsgi
+web: gunicorn afin.wsgi:apllication --log
