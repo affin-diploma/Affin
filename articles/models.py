@@ -1,0 +1,54 @@
+from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
+from django.db import models
+
+
+class Document(models.Model):
+    objects = models.Manager()
+    doc_link = models.CharField(max_length=2048)
+    title = models.CharField(max_length=256)
+    description = models.CharField(max_length=4096)
+    lang = models.CharField(max_length=8)
+    topics = ArrayField(models.CharField(max_length=128))
+    authors = ArrayField(models.CharField(max_length=128))
+    publisher = models.CharField(max_length=256)
+    published = models.IntegerField()
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted = models.BooleanField()
+
+
+class Bookmark(models.Model):
+    class Meta:
+        unique_together = (('user_id', 'document_id'),)
+
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    document_id = models.ForeignKey(Document, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class SearchQuery(models.Model):
+    searchQuery = models.CharField(max_length=512)
+    title = models.CharField(max_length=256, default=None)
+    description = models.CharField(max_length=4096, default=None)
+    lang = models.CharField(max_length=8, default=None)
+    topics = ArrayField(models.CharField(max_length=128, default=None))
+    authors = ArrayField(models.CharField(max_length=128, default=None))
+    publisher = models.CharField(max_length=256, default=None)
+    published_before = models.IntegerField()
+    published_after = models.IntegerField()
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class QueriesDocument(models.Model):
+    class Meta:
+        unique_together = (('query_id', 'document_id'),)
+
+    query_id = models.ForeignKey(SearchQuery, on_delete=models.CASCADE)
+    document_id = models.ForeignKey(Document, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
