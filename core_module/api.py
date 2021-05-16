@@ -8,7 +8,7 @@ class CoreListView(APIView):
     def post(self, request):
 
         req = requests.post(
-            'https://kka8kksmqf.execute-api.eu-central-1.amazonaws.com/Prod/GetArticlesCore',
+            'https://kka8kksmqf.execute-api.eu-central-1.amazonaws.com/Prod/Core/GetArticles',
             json=request.data
         )
         articles = req.json()
