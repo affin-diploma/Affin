@@ -17,17 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from general_api_module.api import CoreListView
-from articles.views import DocumentViewSet, AuthorsListViewSet, AutocompleteAuthors, AutocompletePublishers
+from general_api_module.api import PullArticlesListView
+from articles.views import DocumentViewSet, AutocompleteAuthors, AutocompletePublishers
 
 router = SimpleRouter()
 
 router.register(r'articles', DocumentViewSet)
-# router.register(r'authors', AuthorsListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('core/', CoreListView.as_view()),
+    path('pullArticles/', PullArticlesListView.as_view()),
     path('authors/', AutocompleteAuthors.as_view()),
     path('publishers/', AutocompletePublishers.as_view()),
 ]
