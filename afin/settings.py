@@ -70,6 +70,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3030',
+    'http://localhost:8000',
 ]
 
 CORS_ALLOW_HEADERS = [

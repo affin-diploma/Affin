@@ -49,8 +49,8 @@ class PullArticlesListView(APIView):
                                                 authors=article['authors'],
                                                 publisher=article['publisher'],
                                                 year=article['year'],
-                                                relations=article['relations'],
-                                                deleted=False)
+                                                relations=article['relations']
+                                                )
 
         articles = req.json()
 
