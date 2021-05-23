@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'articles',
-    'core_module',
+    'general_api_module',
     'history',
 ]
 

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from core_module.api import CoreListView
+from general_api_module.api import CoreListView
 from articles.views import DocumentViewSet, AuthorsListViewSet, AutocompleteAuthors, AutocompletePublishers
 
 router = SimpleRouter()
