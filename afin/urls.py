@@ -26,7 +26,7 @@ router.register(r'articles', DocumentViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pullArticles/', PullArticlesListView.as_view()),
+    path('pullarticles/', PullArticlesListView.as_view()),
     path('authors/', AutocompleteAuthors.as_view()),
     path('publishers/', AutocompletePublishers.as_view()),
 ]
