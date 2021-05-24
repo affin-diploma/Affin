@@ -23,6 +23,7 @@ class PullArticlesListView(APIView):
             )
 
             result = req.json()
+
             if articles["status"] == "ERROR":
                 if result["status"] == "OK":
                     articles["status"] = result["status"]
@@ -51,7 +52,5 @@ class PullArticlesListView(APIView):
                                                 year=article['year'],
                                                 relations=article['relations']
                                                 )
-
-        articles = req.json()
 
         return Response(data=articles)
