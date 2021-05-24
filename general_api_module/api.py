@@ -52,6 +52,5 @@ class PullArticlesListView(APIView):
                                                 relations=article['relations']
                                                 )
 
-        articles = req.json()
 
         return Response(data=articles)
