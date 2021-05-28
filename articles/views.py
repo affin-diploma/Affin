@@ -29,7 +29,7 @@ class AutocompleteAuthors(APIView):
         term = request.GET.get('term')
         authors_list = list()
         if 'term' in request.GET:
-            qs = Document.objects.filter(authors__icontains=term)
+            qs = Document.objects.filter(authors__icontains=term)[:20]
             for authors in qs:
                 for author in authors.authors:
                     if term in author:
@@ -37,13 +37,13 @@ class AutocompleteAuthors(APIView):
                             authors_list.append(author)
 
         else:
-            qs = Document.objects.all()
+            qs = Document.objects.all()[:20]
             for authors in qs:
                 for author in authors.authors:
                     if author not in authors_list:
                         authors_list.append(author)
 
-        result = {"authors": authors_list}
+        result = {"authors": authors_list[:20]}
         return JsonResponse(result, safe=False)
 
 
@@ -52,16 +52,16 @@ class AutocompletePublishers(APIView):
         term = request.GET.get('term')
         publishers_list = list()
         if 'term' in request.GET:
-            qs = Document.objects.filter(publisher__icontains=term)
+            qs = Document.objects.filter(publisher__icontains=term)[:20]
             for publisher in qs:
                 if publisher.publisher not in publishers_list:
                     publishers_list.append(publisher.publisher)
 
         else:
-            qs = Document.objects.all()
+            qs = Document.objects.all()[:20]
             for publisher in qs:
                 if publisher.publisher not in publishers_list:
                     publishers_list.append(publisher.publisher)
 
-        result = {"publishers": publishers_list}
+        result = {"publishers": publishers_list[:20]}
         return JsonResponse(result, safe=False)
