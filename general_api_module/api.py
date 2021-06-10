@@ -43,7 +43,7 @@ class PullArticlesListView(APIView):
                     else:
                         Document.objects.create(downloadUrl=article['downloadUrl'],
                                                 doi=article['doi'],
-                                                title=article['title'],
+                                                title=article['title'][:256],
                                                 description=article['description'],
                                                 lang=article['lang'],
                                                 topics=article['topics'],
